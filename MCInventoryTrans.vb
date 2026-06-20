@@ -375,17 +375,17 @@ Public Class MCInventoryTrans
 
         Try
             With p_oDTMstr
-                lsTmpSQL = "SELECT" & _
-                               "  a.*" & _
-                               ", IFNull(b.sBranchCd, '') xBranchCd" & _
-                               ", b.nQtyOnHnd xQtyOnHnd" & _
-                               ", b.nRpoOnHnd xRpoOnHnd" & _
-                               ", b.nLedgerNo xLedgerNo" & _
-                            " FROM MC_Inventory a" & _
-                                  " LEFT JOIN MC_Inventory b" & _
-                                     " ON a.sMCInvIDx = b.sMCInvIDx" & _
-                                        " AND b.sBranchCd = " & strParm(p_sBranchCd) & _
-                            " WHERE a.sMCInvIDx = " & strParm(.Rows(lnRow).Item("sMCInvIDx")) & _
+                lsTmpSQL = "SELECT" &
+                               "  a.*" &
+                               ", IFNull(b.sBranchCd, '') xBranchCd" &
+                               ", b.nQtyOnHnd xQtyOnHnd" &
+                               ", b.nRpoOnHnd xRpoOnHnd" &
+                               ", IFNULL(b.nLedgerNo, '') xLedgerNo" &
+                            " FROM MC_Inventory a" &
+                                  " LEFT JOIN MC_Inventory b" &
+                                     " ON a.sMCInvIDx = b.sMCInvIDx" &
+                                        " AND b.sBranchCd = " & strParm(p_sBranchCd) &
+                            " WHERE a.sMCInvIDx = " & strParm(.Rows(lnRow).Item("sMCInvIDx")) &
                             " LIMIT 1"
                 loDta = p_oApp.ExecuteQuery(lsTmpSQL)
 
